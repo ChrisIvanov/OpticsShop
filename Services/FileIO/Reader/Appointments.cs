@@ -1,0 +1,58 @@
+﻿namespace OpticsShop.Services.FileIO.Reader
+{
+    using OpticsShop.Database.Entities;
+    using OpticsShop.Database.Models;
+    using OpticsShop.Global;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Text.Json;
+    using System.Threading.Tasks;
+    using static OpticsShop.Funcs.Exams.DoctorsAppointments;
+
+    internal class Appointments
+    {
+        public static async Task<List<AppointmentViewModel>> GetAllFutureAppointments()
+        {
+            DateOnly today = DateOnly.FromDateTime(DateTime.Now);
+
+            List<AppointmentViewModel> result = new List<AppointmentViewModel>();
+
+            var filePath = File.ReadAllText(GlobalVariables.APPOINTMENTS_FILE_PATH);
+            using FileStream stream = File.OpenRead(filePath);
+
+            await foreach (Appointment appointment in JsonSerializer.DeserializeAsyncEnumerable<Appointment>(stream))
+            {
+                // допълнителни проверки TODO
+
+                if (DateOnly.FromDateTime(appointment!.AppointmentDate) < today) continue;
+
+                AppointmentViewModel appointmentViewModel = new AppointmentViewModel()
+                {
+                    Title = appointment.Title,
+                    PatientName = appointment.Patient.Name,
+                    AppointmentDate = appointment.AppointmentDate,
+                    Description = appointment.Description,
+                };
+
+                result.Add(appointmentViewModel);
+            }
+
+            return result;
+        }
+
+        public async static Task<bool> IsTimeSlotAvailable(DateTime appointmentDatetime)
+        {
+            var filePath = File.ReadAllText(GlobalVariables.APPOINTMENTS_FILE_PATH);
+            using FileStream stream = File.OpenRead(filePath);
+
+            await foreach (Appointment appointment in JsonSerializer.DeserializeAsyncEnumerable<Appointment>(stream))
+            {
+                if (appointment.AppointmentDate == appointmentDatetime) return true;
+            }
+
+            return false;
+        }
+    }
+}

@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Funcs\Promotions\" />
+    <Folder Include="Funcs\Shop\Glasses\" />
+    <Folder Include="Funcs\Shop\Contact Lenses\" />
+    <Folder Include="Funcs\Shop\Frames\" />
+    <Folder Include="Users\Admins\" />
+  </ItemGroup>
+
+</Project>
