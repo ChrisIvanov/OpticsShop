@@ -5,7 +5,7 @@
     using Database.Models;
     using System.Runtime.InteropServices;
 
-    public static class Create
+    public class Create
     {
         private PatientViewModel patientModel; 
 
@@ -23,7 +23,7 @@
         // проверка за свободен час 
         public static bool IsTimeSlotAvailable()
         {
-            Read
+            //Read
             return true;
         }
 
@@ -46,7 +46,7 @@
                 case 5: appointmentDate = new DateTime(date: date, new TimeOnly(14, 0)); break;
             }
 
-            AppointmentDate = appointmentDate;
+            //AppointmentDate = appointmentDate;
         }
     }
 }

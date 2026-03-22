@@ -7,10 +7,10 @@
 
     public static class Authenticate
     {
-        public static bool IsUserRegistered()
+        public async static Task<bool> IsUserRegistered()
         {
             // изтегляне на данни от записите
-            List<User> allusers = Users.GetAllUsers();
+            List<UserViewModel> allusers = await Users.GetAllUsers();
 
             // проверка на името
 

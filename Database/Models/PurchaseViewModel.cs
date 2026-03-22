@@ -7,6 +7,6 @@
     {
         public DateTime CreatedAt { get; set; }
         public double Total { get; set; }
-        public List<ItemViewModel> Items { get; set; }
+        public List<ItemViewModel> Items { get; set; } = new List<ItemViewModel>();
     }
 }
