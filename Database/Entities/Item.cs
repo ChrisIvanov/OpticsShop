@@ -1,12 +1,12 @@
 ﻿namespace OpticsShop.Database.Entities
 {
-    internal class Item
+    public class Item
     {
-        internal int Id { get; set; }
-        internal string Name { get; set; }
-        internal string Descripton { get; set; }
-        internal double Price { get; set; }
-        internal int Quantity { get; set; }
-        internal bool IsInStock { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string Descripton { get; set; } = string.Empty;
+        public double Price { get; set; }
+        public int Quantity { get; set; }
+        public bool IsInStock { get; set; }
     }
 }

@@ -1,10 +1,10 @@
 ﻿namespace OpticsShop.Database.Entities
 {
-    internal class Purchase
+    public class Purchase
     {
-        internal int Id { get; set; }
-        internal DateTime CreatedAt { get; set; }
-        internal double Total { get; set; }
-        internal List<Item> Items { get; set; } = new List<Item>();
+        public int Id { get; set; }
+        public DateTime CreatedAt { get; set; } 
+        public double Total { get; set; } 
+        public List<Item> Items { get; set; } = new List<Item>(); 
     }
 }

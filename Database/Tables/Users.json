@@ -1,0 +1,24 @@
+[
+  {
+    "Id": 0,
+    "Name": "asd",
+    "Password": "123",
+    "Description": "Description",
+    "Role": {
+      "Id": 1,
+      "RoleName": "Admin"
+    },
+    "Purchases": []
+  },
+  {
+    "Id": 1,
+    "Name": "user",
+    "Password": "123",
+    "Description": "Description",
+    "Role": {
+      "Id": 2,
+      "RoleName": "User"
+    },
+    "Purchases": []
+  }
+]

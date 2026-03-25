@@ -1,8 +1,8 @@
 ﻿namespace OpticsShop.Database.Entities
 {
-    internal class Patient : User
+    public class Patient : User
     {
-        internal List<Appointment> Appointments { get; set; }
+        public List<Appointment> Appointments { get; set; } = new List<Appointment>();
 
     }
 }

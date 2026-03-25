@@ -104,7 +104,8 @@
             .AddColumn("Дата", 10)
             .AddColumn("Описание", 10);
 
-            List<AppointmentViewModel> futureAppointments = await Services.FileIO.Reader.Appointments.GetAllFutureAppointments();
+            var appointments = new Appointments();
+            List<AppointmentViewModel> futureAppointments = await appointments.GetAllFutureAppointments();
 
             for (int i = 0; i < futureAppointments.Count; i++)
             {

@@ -17,7 +17,7 @@
 
         //служители
         //офталмолог
-        IStaff Ophtaophthalmologist = new Ophthalmologist("Д-р Бъмбълбий", "Нашият специалист по зрението.");
+        //IStaff Ophtaophthalmologist = new Ophthalmologist("Д-р Бъмбълбий", "Нашият специалист по зрението.");
         //продавач-консултант
         //администратор
         //склад

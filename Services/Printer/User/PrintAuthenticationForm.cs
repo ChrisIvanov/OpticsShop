@@ -1,9 +1,11 @@
 ﻿namespace OpticsShop.Services.Printer.User
 {
+    using OpticsShop.Database.Models;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using OpticsShop.Services.User;
     using System.Threading.Tasks;
 
     internal class PrintAuthenticationForm
@@ -14,16 +16,16 @@
         }
 
         private void Print()
-        {
-            StringBuilder sb = new();
 
-            sb.AppendLine("Въведете своите потребителски данни по-долу. В случай, че нямате профил формата ще създаде нов.");
-            sb.Append("Име: ");
+        {
+            Console.WriteLine("Въведете своите потребителски данни по-долу. В случай, че нямате профил формата ще създаде нов.");
+            Console.Write("Име: ");
             string username = Console.ReadLine();
-            sb.Append("Парола: ");
+            Console.Write("Парола: ");
             string password = Console.ReadLine();
 
-            Services.User.Authenticate.IsUserRegistered();
+            UserViewModel userModel = new UserViewModel() { Name = username, Password = password };
+            new Authenticate(userModel);
         }
     }
 }

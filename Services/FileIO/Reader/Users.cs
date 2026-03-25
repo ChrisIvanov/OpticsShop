@@ -8,30 +8,29 @@
 
     internal class Users
     {
-        public static async Task<List<UserViewModel>> GetAllUsers()
+        public async Task<List<UserViewModel>> GetAllUsers()
         {
-            using FileStream stream = File.OpenRead(GlobalVariables.USERS_FILE_PATH);
+            string filePath = GlobalVariables.USERS_FILE_PATH;
 
-            List<UserViewModel> result = new();
+            if (!File.Exists(filePath) || new FileInfo(filePath).Length == 0)
+                return new List<UserViewModel>();
 
-            await foreach (User user in JsonSerializer.DeserializeAsyncEnumerable<User>(stream))
+            await using FileStream stream = File.OpenRead(filePath);
+
+            List<User>? users = await Reader.LoadFromFileAsync<User>(filePath);
+
+            return users.Select(user => new UserViewModel
             {
-                UserViewModel userModel = new UserViewModel()
+                Name = user.Name,
+                Password = user.Password,
+                Description = user.Description,
+                Purchases = user.Purchases == null ? new List<PurchaseViewModel>() : MapPurchases(user.Purchases),
+                Role = new RoleViewModel
                 {
-                    Name = user.Name,
-                    Role =
-                    {
-                        Id = user.Role.Id,
-                        RoleName = user.Role.RoleName
-                    },
-                    Description = user.Description,
-                    Purchases = MapPurchases(user.Purchases),
-                };
-
-                result.Add(userModel);
-            }
-
-            return result;
+                    Id = user.Role.Id,
+                    RoleName = user.Role.RoleName
+                }
+            }).ToList();
         }
 
         private static List<PurchaseViewModel> MapPurchases(List<Purchase> purchases)

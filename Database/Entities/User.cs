@@ -1,11 +1,12 @@
 ﻿namespace OpticsShop.Database.Entities
 {
-    internal class User
+    public class User
     {
-        internal int Id { get; set; }
-        internal string Name { get; set; }
-        internal string Description { get; set; }
-        internal Role Role { get; set; }
-        internal List<Purchase> Purchases { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+        public Role Role { get; set; } = new();
+        public List<Purchase> Purchases { get; set; } = new();
     }
 }

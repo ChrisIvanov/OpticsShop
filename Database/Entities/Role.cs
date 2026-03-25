@@ -1,9 +1,12 @@
 ﻿namespace OpticsShop.Database.Entities
 {
-    internal class Role
+    using System.ComponentModel.DataAnnotations;
+
+    public class Role
     {
-        internal int Id { get; set; }
-        internal string RoleName { get; set; }
+        [Key]
+        public int Id { get; set; }
+        public string RoleName { get; set; } = string.Empty;
 
     }
 }
