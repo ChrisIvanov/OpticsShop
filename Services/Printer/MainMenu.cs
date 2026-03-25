@@ -21,13 +21,13 @@
         private void Print()
         {
             AuthenticatedUser = Authenticate.GetAuthenticatedUser();
-            bool userIsAuthenticated = Authenticate.GetAuthenticatedUser() != new UserViewModel();
+
+            bool userIsAuthenticated = AuthenticatedUser != null;
             StringBuilder sb = new StringBuilder();
 
-            if (userIsAuthenticated)
-            {
-                sb.AppendLine($"\r\nЗдравейте, {AuthenticatedUser.Name}!");
-            }
+            if (userIsAuthenticated) sb.AppendLine($"\r\nДобре дошли, {AuthenticatedUser.Name}!");
+            else sb.AppendLine("\r\nДобре дошли в оптиката!");
+
             sb.AppendLine("\r\nИзберете опция от основното меню:");
             sb.AppendLine("1. Разгледайте продуктите.");
             sb.AppendLine("2. Запишете час за преглед.");
@@ -42,16 +42,14 @@
             }
 
 
-            if (AuthenticatedUser != null)
+            if (userIsAuthenticated && AuthenticatedUser.Role.RoleName == "Admin")
             {
-                if (AuthenticatedUser.Role.RoleName == "Admin")
-                {
-                    sb.AppendLine("\r\n Администраторски досъп...");
-                    sb.AppendLine("5. Добавяне на нов администратор.");
-                    sb.AppendLine("6. Добавяне на продукт.");
-                    sb.AppendLine("7. Изтриване на продукт.");
-                }
+                sb.AppendLine("\r\n Администраторски досъп...");
+                sb.AppendLine("5. Добавяне на нов администратор.");
+                sb.AppendLine("6. Добавяне на продукт.");
+                sb.AppendLine("7. Изтриване на продукт.");
             }
+
 
             Console.WriteLine(sb);
         }
@@ -59,8 +57,51 @@
         internal void Selection(string input)
         {
             AuthenticatedUser = Authenticate.GetAuthenticatedUser();
-            bool userIsAuthenticated = Authenticate.GetAuthenticatedUser() != new UserViewModel();
-            if (!userIsAuthenticated)
+            bool userIsAuthenticated = AuthenticatedUser != null;
+
+
+            if (userIsAuthenticated && AuthenticatedUser.Role.RoleName == "Admin")
+            {
+                switch (input)
+                {
+                    case "1":
+                        new PrintProducts();
+                        break;
+                    case "2":
+                        new PrintAppointmentForm();
+                        break;
+                    case "3":
+                        new PrintContactForm();
+                        break;
+                    case "4":
+                        new PrintAuthenticationForm();
+                        break;
+                    case "5":
+                        new PrintAddAdminForm();
+                        break;
+                    case "6":
+                        new PrintAddProductForm();
+                        break;
+                    case "7":
+                        new PrintDeleteProductForm();
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else if (userIsAuthenticated)
+            {
+                switch (input)
+                {
+                    case "1": new PrintProducts(); break;
+                    case "2": new PrintAppointmentForm(); break;
+                    case "3": new PrintContactForm(); break;
+                    case "4": new PrintLogoutForm(); break;
+                    default:
+                        break;
+                }
+            }
+            else if (!userIsAuthenticated)
             {
 
                 switch (input)
@@ -69,21 +110,6 @@
                     case "2": new PrintAppointmentForm(); break;
                     case "3": new PrintContactForm(); break;
                     case "4": new PrintAuthenticationForm(); break;
-                    default:
-                        break;
-                }
-            }
-            else if (userIsAuthenticated && AuthenticatedUser.Role.RoleName == "Admin")
-            {
-                switch (input)
-                {
-                    case "1": new PrintProducts(); break;
-                    case "2": new PrintAppointmentForm(); break;
-                    case "3": new PrintContactForm(); break;
-                    case "4": new PrintAuthenticationForm(); break;
-                    case "5": new PrintAddAdminForm(); break;
-                    case "6": new PrintAddProductForm(); break;
-                    case "7": new PrintDeleteProductForm(); break;
                     default:
                         break;
                 }

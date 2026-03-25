@@ -1,5 +1,10 @@
 ﻿namespace OpticsShop.Services.Printer.Appointments
 {
+    using OpticsShop.Database.Entities;
+    using OpticsShop.Database.Models;
+    using OpticsShop.Services.FileIO.Reader;
+    using OpticsShop.Services.FileIO.Writer;
+    using OpticsShop.Services.User;
     using System.Net.Http.Headers;
     using System.Text;
 
@@ -12,13 +17,35 @@
 
         public PrintAppointmentForm()
         {
+            if (Authenticate.AuthenticatedUser == null)
+            {
+                Console.WriteLine("Моля, влезте в системата с вашия потребителски профил или се регистрирайте.");
+                return;
+            }
             AppointmentDateTime = new DateTime();
             Console.WriteLine("Задайте дата на прегледа.");
             PrintMonth();
             PrintDate();
             PrintTime();
+            Appointment = CreateAppointment();
+            Writer.SaveAppointmentsAsync(Appointment);
         }
 
+        private AppointmentViewModel CreateAppointment()
+        {
+            if (Appointment == null)
+            {
+                Appointment = new AppointmentViewModel();
+            }
+            Appointment.AppointmentDate = AppointmentDateTime;
+            Appointment.PatientName = Authenticate.AuthenticatedUser.Name;
+            Appointment.Title = "Очен преглед.";
+            Appointment.Description = $"Час за преглед на {AppointmentDateTime.ToShortDateString()} от {AppointmentTime.ToShortTimeString()}.";
+
+            return Appointment;
+        }
+
+        public AppointmentViewModel Appointment { get; set; }
         public DateTime AppointmentDateTime { get; set; }
         public TimeOnly AppointmentTime { get; set; }
         public int AppointmentTimeslot { get; set; }

@@ -1,1 +1,40 @@
-{"description": "JSON файл съдържащ запис на всички съществуващи часове"}
+[
+  {
+    "Id": 0,
+    "Title": "\u041E\u0447\u0435\u043D \u043F\u0440\u0435\u0433\u043B\u0435\u0434.",
+    "Description": "\u0427\u0430\u0441 \u0437\u0430 \u043F\u0440\u0435\u0433\u043B\u0435\u0434 \u043D\u0430 1.1.0001 \u0433. \u043E\u0442 13:00.",
+    "CreatedDate": "0001-01-01T00:00:00",
+    "AppointmentDate": "0001-01-01T00:00:00",
+    "Patient": {
+      "Appointments": [],
+      "Id": 0,
+      "Name": "user",
+      "Password": "",
+      "Description": "",
+      "Role": {
+        "Id": 0,
+        "RoleName": ""
+      },
+      "Purchases": []
+    }
+  },
+  {
+    "Id": 1,
+    "Title": "\u041E\u0447\u0435\u043D \u043F\u0440\u0435\u0433\u043B\u0435\u0434.",
+    "Description": "\u0427\u0430\u0441 \u0437\u0430 \u043F\u0440\u0435\u0433\u043B\u0435\u0434 \u043D\u0430 1.1.0001 \u0433. \u043E\u0442 13:00.",
+    "CreatedDate": "0001-01-01T00:00:00",
+    "AppointmentDate": "0001-01-01T00:00:00",
+    "Patient": {
+      "Appointments": [],
+      "Id": 0,
+      "Name": "user",
+      "Password": "",
+      "Description": "",
+      "Role": {
+        "Id": 0,
+        "RoleName": ""
+      },
+      "Purchases": []
+    }
+  }
+]
