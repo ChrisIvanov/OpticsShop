@@ -74,7 +74,7 @@
                         new PrintContactForm();
                         break;
                     case "4":
-                        new PrintAuthenticationForm();
+                        new PrintLogoutForm();
                         break;
                     case "5":
                         new PrintAddAdminForm();

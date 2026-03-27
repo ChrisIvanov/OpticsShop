@@ -9,7 +9,6 @@
     using System.Text;
     using System.Text.Json;
     using System.Threading.Tasks;
-    using static OpticsShop.Funcs.Exams.DoctorsAppointments;
 
     public class Appointments
     {
@@ -31,15 +30,18 @@
                 AppointmentViewModel appointmentViewModel = new AppointmentViewModel()
                 {
                     Title = appointment.Title,
-                    PatientName = appointment.Patient.Name,
+                    PatientName = appointment.PatientName,
                     AppointmentDate = appointment.AppointmentDate,
                     Description = appointment.Description,
+                    
                 };
 
                 result.Add(appointmentViewModel);
             }
 
-            return result;
+            return result
+                .OrderByDescending(x => x.AppointmentDate)
+                .ToList();
         }
 
         public async Task<bool> IsTimeSlotAvailable(DateTime appointmentDatetime)
@@ -54,7 +56,5 @@
 
             return false;
         }
-
-        
     }
 }

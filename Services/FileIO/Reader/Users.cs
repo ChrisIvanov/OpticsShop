@@ -21,6 +21,7 @@
 
             return users.Select(user => new UserViewModel
             {
+                Id = user.Id,
                 Name = user.Name,
                 Password = user.Password,
                 Description = user.Description,

@@ -13,12 +13,14 @@
         public static async Task<List<ItemViewModel>> GetAllItems()
         {
             string filePath = Global.GlobalVariables.ITEMS_FILE_PATH;
+
             if (!File.Exists(filePath) || new FileInfo(filePath).Length == 0)
                 return new List<ItemViewModel>();
+
             using FileStream stream = File.OpenRead(filePath);
             List<Item>? items = await Reader.LoadFromFileAsync<Item>(filePath);
+            
             return MapItemsToModel(items);
-
         }
 
         private static List<ItemViewModel> MapItemsToModel(List<Item> items)

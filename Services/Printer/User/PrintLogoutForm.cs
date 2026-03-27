@@ -1,5 +1,6 @@
 ﻿namespace OpticsShop.Services.Printer.User
 {
+    using OpticsShop.Services.User;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -15,7 +16,8 @@
 
         private void Print()
         {
-            throw new NotImplementedException();
+            Authenticate.AuthenticatedUser = null;
+             Console.WriteLine("Успешно излязохте от профила си. До скоро!");
         }
     }
 }

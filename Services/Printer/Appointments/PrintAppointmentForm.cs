@@ -4,16 +4,14 @@
     using OpticsShop.Database.Models;
     using OpticsShop.Services.FileIO.Reader;
     using OpticsShop.Services.FileIO.Writer;
+    using OpticsShop.Services.Patient;
     using OpticsShop.Services.User;
     using System.Net.Http.Headers;
     using System.Text;
 
     internal class PrintAppointmentForm
     {
-        private int appointmentMonth;
         private int appointmentDay;
-        private int appointmentTime;
-        private int appointmentTimeslot;
 
         public PrintAppointmentForm()
         {
@@ -27,6 +25,7 @@
             PrintMonth();
             PrintDate();
             PrintTime();
+            GenerateAppointmentDateTime();
             Appointment = CreateAppointment();
             Writer.SaveAppointmentsAsync(Appointment);
         }
@@ -37,10 +36,12 @@
             {
                 Appointment = new AppointmentViewModel();
             }
+
             Appointment.AppointmentDate = AppointmentDateTime;
             Appointment.PatientName = Authenticate.AuthenticatedUser.Name;
             Appointment.Title = "Очен преглед.";
             Appointment.Description = $"Час за преглед на {AppointmentDateTime.ToShortDateString()} от {AppointmentTime.ToShortTimeString()}.";
+            Appointment.PatientName = Authenticate.AuthenticatedUser.Name;
 
             return Appointment;
         }
@@ -82,14 +83,14 @@
             int numberOfDaysInMonth = DateTime.DaysInMonth(year, AppointmentMonth);
             bool repeat = false;
             string dayInput;
-
+            int appointmentDay;
             do
             {
                 Console.Write($"Изберете ден (1-{numberOfDaysInMonth}): ");
 
                 dayInput = Console.ReadLine();
 
-                int.TryParse(dayInput, out int appointmentDay);
+                int.TryParse(dayInput, out appointmentDay);
 
                 if (appointmentDay < 1 || appointmentDay > numberOfDaysInMonth)
                 {
