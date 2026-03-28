@@ -71,8 +71,11 @@
                     Console.WriteLine("Моля, въведете избрания месец като число (1 - 12) или натиснете [Q], за да напуснете формуляра.");
                     repeat = true;
                 }
-
-                AppointmentMonth = appointmentMonth;
+                else
+                {
+                    repeat = false;
+                }
+                    AppointmentMonth = appointmentMonth;
 
             } while (repeat && monthInput != "Q");
         }
@@ -96,6 +99,7 @@
                 {
                     Console.Write($"Моля, изберете ден от месеца в указания диапазон 1 - {numberOfDaysInMonth} или натиснете [Q], за да напуснете формуляра.");
                     repeat = true;
+                    continue;
                 }
                 else repeat = false;
 

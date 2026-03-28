@@ -7,5 +7,14 @@
     "AppointmentDate": "2026-04-04T00:00:00",
     "PatientId": 1,
     "PatientName": "user"
+  },
+  {
+    "Id": 1,
+    "Title": "\u041E\u0447\u0435\u043D \u043F\u0440\u0435\u0433\u043B\u0435\u0434.",
+    "Description": "\u0427\u0430\u0441 \u0437\u0430 \u043F\u0440\u0435\u0433\u043B\u0435\u0434 \u043D\u0430 4.4.2026 \u0433. \u043E\u0442 13:00.",
+    "CreatedDate": "2026-03-28T13:10:48.3725152+02:00",
+    "AppointmentDate": "2026-04-04T00:00:00",
+    "PatientId": 0,
+    "PatientName": "asd"
   }
 ]
